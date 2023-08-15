@@ -1,0 +1,62 @@
+from data import MENU, resources
+
+water = resources.get("water")
+milk = resources.get("milk")
+coffee = resources.get("coffee")
+money_stored = 0
+
+def add_coins(q1, d1, n1, p1):
+  q1_total = (q1 * .25)
+  d1_total = (d1 * .10)
+  n1_total = (n1 * .05)
+  p1_total = (p1 * .01)
+  total_coins = (q1_total + d1_total + n1_total + p1_total)
+  for check in 
+  if total_coins < MENU["espresso"]["cost"]:
+    return "not enough coins, Would you like to insert more? "
+  if total_coins > 
+
+def resources_available():
+  global resources
+  if coffee_choice == "report":
+    print(f"Water: {water}ml\nmilk: {milk}ml\ncoffee: {coffee}g\nMoney: {money}")
+
+def resources_check():
+  print("The following resources are not available: ")
+  if resources["water"] < 20
+    print("water")
+  if resources["milk"] < 20
+    print("water")
+  if resource["coffee"] < 10
+    print("coffee")
+
+def coffee_resources_check():
+  if coffee_choice == "espresso":
+    if MENU["espresso"]["ingredients"]["water"] < resources["water"] or MENU["espresso"]["ingredients"]["coffee"] < resources["coffee"]
+    return "Resources not available, please come back tomorrow"
+
+  elif coffee_choice == "latte":
+    if MENU["latte"]["ingredients"]["water"] < resources["water"] or MENU["latte"]["ingredients"]["coffee"] < resources["coffee"]
+    return "Resources not available, please come back tomorrow"
+
+  elif ecoffee_choice == "latte":
+    if MENU["cappuccino"]["ingredients"]["water"] < resources["water"] or MENU["cappuccino"]["ingredients"]["coffee"] < resources["coffee"]
+    return "Resources not available, please come back tomorrow"
+
+def turn_off():
+  if coffee_choice == "off": 
+    print("Turning off, Have a good day! ")
+    
+
+
+
+coffee_choice = input("What would you like? (espresso/latte/cappuccino: ) ")
+print("Please insert Coins: ")
+quarter_amount = int(input("How many quarters?: "))
+dime_amount = int(input("How many dimes: "))
+nickel_amount = int(input("How many Nickels: "))
+penny_amount = int(input("How many pennies: "))
+
+resources_check()
+
+add_coins(q1=quarter_amount, d1=dime_amount, n1=nickel_amount,p1=penny_amount)
