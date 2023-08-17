@@ -1,0 +1,109 @@
+import random
+import os
+
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+def resources_available():
+  global coffee_choice
+  global resources
+  if coffee_choice == "report":
+    print(resources)
+    coffee_choice = input("What would you like?(espresso/latte/cappuccino: ) ")
+
+def add_coins(q1, d1, n1, p1):
+  q1_total = (q1 * .25)
+  d1_total = (d1 * .10)
+  n1_total = (n1 * .05)
+  p1_total = (p1 * .01)
+  total_coins = (q1_total + d1_total + n1_total + p1_total)
+  return total_coins
+
+def turn_off():
+  if coffee_choice == "off":
+    print("Turning off, Have a good day! ")
+    return True
+    
+def coffee_resources_check():
+  print("Checking Resources")
+  global coffee_choice
+  if coffee_choice == "espresso":
+    if MENU[coffee_choice]["ingredients"]["water"] > resources["water"]:
+      print(f" Low on Water")
+    if MENU[coffee_choice]["ingredients"]["coffee"] > resources["coffee"]:
+      print("low on Coffee")
+    
+  elif MENU[coffee_choice]["ingredients"]["milk"] > resources["milk"]:
+    print(f"Low on Milk \n returned {total_coins}")
+  elif MENU[coffee_choice]["ingredients"]["coffee"] > resources["coffee"]:
+    print(f"low on Coffee\n returned {total_coins}")
+  elif MENU[coffee_choice]["ingredients"]["water"] > resources["water"]:
+    print(f"Low on Water\n returned {total_coins}")
+
+  else:
+    return True
+
+
+    
+machine_on = True    
+machine_off = False
+while not machine_off:
+  coffee_choice = input("What would you like?(espresso/latte/cappuccino: ) ")
+  if turn_off() == True:
+    machine_off = True
+    machine_on = False
+    
+  else:
+    resources_available()
+    
+  
+  while machine_on:
+    print("Please insert Coins: ")
+    quarter_amount = int(input("How many quarters?: "))
+    dime_amount = int(input("How many dimes: "))
+    nickel_amount = int(input("How many Nickels: "))
+    penny_amount = int(input("How many pennies: "))
+    
+    total_coins = round(add_coins(q1=quarter_amount, d1=dime_amount, n1=nickel_amount, p1=penny_amount), 2)
+    
+    if total_coins > MENU[coffee_choice]["cost"]:
+      enough_money = True
+    elif total_coins < MENU[coffee_choice]["cost"]:
+      enough_money = False
+      os.system("clear")
+      print(f"input more money\n returned ${total_coins}")
+      machine_on = True
+
+      print(resources)
+          
+      change = round(total_coins - (MENU[coffee_choice]["cost"]), 2)
+      print(f"dispensing...\ndispensing....\ndispensing.....\nhere is your {coffee_choice} and have a great day!\nChange: {change}")
